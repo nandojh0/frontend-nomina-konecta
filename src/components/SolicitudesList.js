@@ -127,8 +127,8 @@ const SolicitudesList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {solicitudes.map((solicitud) => (
-                            <tr key={solicitud.id}>
+                        {solicitudes.map((solicitud,index) => (
+                            <tr key={index}>
                                 <td>{solicitud.codigo}</td>
                                 <td>{solicitud.descripcion}</td>
                                 <td>{solicitud.resumen}</td>

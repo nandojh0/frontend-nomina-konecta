@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'; // Importar SweetAlert2
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { setToken } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -15,6 +15,7 @@ const Login = () => {
 
         try {
             const apiUrl = process.env.REACT_APP_API_URL;
+
             const response = await fetch(`${apiUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: {
@@ -24,10 +25,9 @@ const Login = () => {
             });
 
             const data = await response.json();
-            
+
             if (response.ok) {
-                setToken(data.token); // Almacena el token en el contexto
-                localStorage.setItem('token', data.token); // También puedes almacenarlo en localStorage
+                login(data.token); // Almacena el token usando el método login del contexto
                 navigate('/EmpleadoList'); // Redirige a EmpleadoList después de iniciar sesión
             } else {
                 // Usar SweetAlert2 para mostrar el mensaje de error
@@ -76,9 +76,9 @@ const Login = () => {
                     />
                 </div>
                 <button type="submit" className="btn btn-primary w-100">Iniciar Sesión</button>
-                <button 
-                    type="button" 
-                    className="btn btn-link ms-3" 
+                <button
+                    type="button"
+                    className="btn btn-link ms-3"
                     onClick={() => navigate('/register')} // Navegar a Register
                 >
                     Crear cuenta

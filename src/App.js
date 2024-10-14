@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthContext } from './context/AuthContext';
 import Login from './components/Login';
 import Register from './components/Register';
 import EmpleadoForm from './components/EmpleadoForm';
 import EmpleadoList from './components/EmpleadoList';
 import SolicitudesForm from './components/SolicitudesForm';
 import SolicitudesList from './components/SolicitudesList';
-import { AuthContext } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute'; // Asegúrate de importar ProtectedRoute
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
-
 const App = () => {
-    const [token, setToken] = useState(localStorage.getItem('token'));
-
+    const { token } = useContext(AuthContext);
     // Efecto para manejar el almacenamiento del token
     useEffect(() => {
         if (token) {
@@ -28,7 +24,6 @@ const App = () => {
     }, [token]);
 
     return (
-        <AuthContext.Provider value={{ token, setToken }}>
             <Router>
                 <Routes>
                     {/* Rutas públicas */}
@@ -73,7 +68,6 @@ const App = () => {
                     <Route path="/" element={<Navigate to="/login" />} />
                 </Routes>
             </Router>
-        </AuthContext.Provider>
     );
 };
 

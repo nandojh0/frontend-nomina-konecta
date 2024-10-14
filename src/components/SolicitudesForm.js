@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'; // Importar SweetAlert2
 import { useNavigate } from 'react-router-dom';
 
 
+
 const SolicitudesForm = () => {
     const { setSolicitudes, empleados } = useContext(AppContext);
     const { token } = useContext(AuthContext);
@@ -26,7 +27,8 @@ const SolicitudesForm = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3002/api/solicitudes', {
+            const apiUrl = process.env.REACT_APP_API_URL;
+            const response = await fetch(`${apiUrl}/api/solicitudes`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

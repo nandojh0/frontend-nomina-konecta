@@ -1,7 +1,7 @@
 // src/components/EmpleadoList.js
 import React, { useEffect, useContext, useState } from 'react';
-import { AppContext } from '../context/AppContext';
 import { AuthContext } from '../context/AuthContext';
+import { AppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import Logout from '../components/Logout';
 import Swal from 'sweetalert2'; // Importa SweetAlert2 
